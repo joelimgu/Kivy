@@ -1,0 +1,95 @@
+#:kivy 1.0.9
+<ScreenManager>
+    MenuScreen:
+    GameScreen:
+
+<RoundedButton@Button>:
+    radius: 0
+    background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+    canvas.before:
+        Color:
+            rgba: (.4,.4,.4,1) if self.state=='normal' else (0,.7,.7,1)  # visual feedback of press
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [self.radius,]
+
+<PongBall>:
+    size:50,50
+    canvas:
+        Ellipse:
+            pos:self.pos
+            size: self.size
+            source: "PongBall.png"
+
+<PongPaddle>
+    background_color: 1,1,0,1
+    size: 50, 200
+    canvas:
+        Color:
+            rgb: 1,0,0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+
+<PongGame>:
+    ball: pong_ball
+    player1 : player_left
+    player2: player_right
+
+    canvas:
+        Rectangle:
+            pos:self.center_x -5, 0
+            size: 10, self.height
+
+    Label:
+        font_size: 70
+        center_x: root.width / 4
+        top: root.top -50
+        text: str(root.player1.score)
+
+
+    Label:
+        font_size: 70
+        center_x: root.width * 3/4
+        top: root.top -50
+        text: str(root.player2.score)
+
+    PongBall:
+        id: pong_ball
+        center: self.parent.center
+        size: root.width/16, root.width/16
+
+    PongPaddle:
+        id: player_left
+        x: root.x
+        center_y: root.center_y
+        size: root.width/16 , root.height/4
+        background_color: 1, 0, 1, 1
+
+    PongPaddle:
+        id: player_right
+        x: root.width - self.width
+        center_y: root.center_y
+        size: root.width/16 , root.height/4
+
+
+<MenuScreen>
+    GridLayout:
+        cols:3
+        size: root.width, root.height
+        GridLayout:
+            cols:3
+            RoundedButton:
+                id: btn
+                radius: 200
+                pos_hint: 0.5,0.5
+                size: 300, 300
+
+
+
+
+<GameScreen>
+    name:"Game"
