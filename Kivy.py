@@ -1,10 +1,5 @@
 from kivy.app import App
 from kivy.uix.button import Button
-from kivy.uix.widget import Widget
-from kivy.properties import NumericProperty, ReferenceListProperty, ObjectProperty
-from kivy.vector import Vector
-from kivy.clock import Clock
-from random import randint
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 
@@ -15,6 +10,7 @@ class RoundedButton(Button):
 
     def __init__(self, *kwargs):
         super.__init__(*kwargs)
+
 
 class MainScreen(Screen):
     pass
