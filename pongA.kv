@@ -1,14 +1,20 @@
 #:kivy 1.0.9
+#:import hex kivy.utils.get_color_from_hex
+#:import sp kivy.metrics.sp
+
 <ScreenManager>
     MenuScreen:
     MainScreen:
 
 <RoundedButton@Button>:
     radius: 0
+    color: 1,1,1,1
+    color_pressed: .5,.5,.5,.5
+
     background_color: 0,0,0,0  # the last zero is the critical on, make invisible
     canvas.before:
         Color:
-            rgba: (.4,.4,.4,1) if self.state=='normal' else (0,.7,.7,1)  # visual feedback of press
+            rgba: (self.color) if self.state=='normal' else (self.color_pressed)  # visual feedback of press
         RoundedRectangle:
             pos: self.pos
             size: self.size
@@ -19,16 +25,15 @@
 
 <MenuScreen>
     button:btn
-    GridLayout:
-        cols:3
-        size: root.width, root.height
-        GridLayout:
-            cols:3
-            RoundedButton:
-                on_press: root.btn_click()
-                id: btn
-                radius: 200
-                pos_hint: 0.5,0.5
-                size: 300, 300
+    RoundedButton:
+        id:btn
+        color: hex('#e056fdff')
+        color_pressed: hex('#7e0297')
+        radius: 8
+        size_hint: 0.75, 0.16
+        pos_hint: {"x":0.125, "y":0.345}
+        text: "hola"
+        text_color: (1,1,1,1)
+
 
 
