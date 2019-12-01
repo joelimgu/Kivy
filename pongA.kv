@@ -8,17 +8,20 @@
 
 <RoundedButton@Button>:
     radius: 0
-    color: 1,1,1,1
+    btn_color: 1,1,1,1
     color_pressed: .5,.5,.5,.5
 
     background_color: 0,0,0,0  # the last zero is the critical on, make invisible
     canvas.before:
         Color:
-            rgba: (self.color) if self.state=='normal' else (self.color_pressed)  # visual feedback of press
+            rgba: (self.btn_color) if self.state=='normal' else (self.color_pressed)  # visual feedback of press
         RoundedRectangle:
             pos: self.pos
             size: self.size
             radius: [self.radius,]
+
+<Ball>
+    size: 50,50
 
 <MainScreen>
 
@@ -27,13 +30,13 @@
     button:btn
     RoundedButton:
         id:btn
-        color: hex('#e056fdff')
+        btn_color: hex('#e056fdff')
         color_pressed: hex('#7e0297')
         radius: 8
         size_hint: 0.75, 0.16
         pos_hint: {"x":0.125, "y":0.345}
-        text: "hola"
-        text_color: (1,1,1,1)
-
+        text: "START"
+        color: (0,0,0,1)
+        font_size: int(self.height/3)
 
 

@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
+from kivy.uix.widget import Widget
 import tkinter as tk
 from kivy import Config
 
@@ -18,6 +19,10 @@ Config.set('graphics', 'height', root.winfo_screenheight() - 60)
 Config.write()
 
 Builder.load_file("pongA.kv")
+
+
+class Ball(Widget):
+    pass
 
 
 class RoundedButton(Button):
