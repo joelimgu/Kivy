@@ -21,13 +21,23 @@
             radius: [self.radius,]
 
 <Ball>
-    size: 50,50
+    r_size: 0.1
+    size_hint: self.r_size, self.r_size*(9/16)
+    canvas:
+        Ellipse:
+            pos: self.pos
+            size:self.size
+            source: "res\white_circle.png"
 
 <MainScreen>
 
 
 <MenuScreen>
     button:btn
+
+    Ball:
+        r_size: .1
+
     RoundedButton:
         id:btn
         btn_color: hex('#e056fdff')

@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.properties import NumericProperty, ReferenceListProperty
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
@@ -7,6 +8,8 @@ import tkinter as tk
 from kivy import Config
 
 #Gets the screen size using tkinter
+from kivy.vector import Vector
+
 root = tk.Tk()
 root.withdraw()
 
@@ -15,19 +18,26 @@ print(root.winfo_screenheight())
 
 #sets the screen into a 16/9 ratio in a vertical position taking the screen size of the device
 Config.set('graphics', 'width', int(root.winfo_screenheight()*9/16))
-Config.set('graphics', 'height', root.winfo_screenheight() - 60)
+Config.set('graphics', 'height', root.winfo_screenheight() - 70)
 Config.write()
 
 Builder.load_file("pongA.kv")
 
 
 class Ball(Widget):
-    pass
+    velocity_x = NumericProperty(0)
+    velocity_y = NumericProperty(0)
+    velocity = ReferenceListProperty(velocity_x, velocity_y)
+
+    Velocity = Vector
+
+    def move(self, x, y):
+        self.pos = (x,y)
+
 
 
 class RoundedButton(Button):
-    def __init__(self, *kwargs):
-        super.__init__(*kwargs)
+    pass
 
 
 class MainScreen(Screen):
@@ -35,9 +45,6 @@ class MainScreen(Screen):
 
 
 class MenuScreen(Screen):
-
-    def __init__(self, **kwargs):
-        super(MenuScreen, self).__init__(**kwargs)
 
     def btn_click(self):
         print("clicked")
@@ -57,3 +64,4 @@ class PongApp(App):
 
 if __name__ == '__main__':
     PongApp().run()
+
